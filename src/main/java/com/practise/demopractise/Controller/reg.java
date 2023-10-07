@@ -1,6 +1,5 @@
 package com.practise.demopractise.Controller;
 
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -48,8 +47,28 @@ public class reg {
     }
 
     @GetMapping("/edit")
-    public String editPage() {
+    public String edit(@RequestParam Long studentID, Model model) {
+        String sql = "SELECT * FROM student where ID = ?";
+        Map<String, Object> edit = jdbcTemplate.queryForMap(sql, studentID);
+        model.addAttribute("edit", edit);
         return "edit";
+    }
+
+    @PostMapping("/studentupdate")
+    public String studentupdate(
+            @RequestParam String ID,
+            @RequestParam String studentName,
+            @RequestParam String studentID,
+            @RequestParam String studentPhone,
+            @RequestParam String studentClass) {
+
+        int studentIDValue = Integer.parseInt(studentID);
+        int studentClassValue = Integer.parseInt(studentClass);
+        String sql = "UPDATE student SET STUDENT_NAME = ?, STUDENT_ROLL = ?, STUDENT_PHONE = ?, STUDENT_CLASS = ? WHERE ID = ?";
+
+        jdbcTemplate.update(sql, studentName, studentIDValue, studentPhone, studentClassValue, ID);
+
+        return "redirect:/show";
     }
 
     @GetMapping("/dashboard")
@@ -121,12 +140,11 @@ public class reg {
 
     @GetMapping("/studentdelete")
     public String studentdelete(
-        @RequestParam int studentID) {
-        String sql = "DELETE FROM student WHERE id = ?";
+            @RequestParam int studentID) {
+        String sql = "DELETE FROM student WHERE ID = ?";
         jdbcTemplate.update(sql, studentID);
-    
+
         return "redirect:/show"; // Redirect to the show page after deletion
     }
-    
 
 }

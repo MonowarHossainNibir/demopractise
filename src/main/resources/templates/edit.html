@@ -1,39 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
-  <html xmlns:th="http://www.thymeleaf.org" lang="en"></html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Under Development</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
     <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-      .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
 
-      .tagline {
-        font-size: 24px;
-        text-align: center;
-        color: #333;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      }
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <p class="tagline">Please wait, it is under development</p>
+        <h2>Update Student Information</h2>
+        <form  th:action="@{/studentupdate}" th:object="${edit}" method="post">
+          <input type="hidden"  name="ID" th:value="${edit['ID']}" />
+            <div class="form-group">
+                <label for="studentName">Student Name:</label>
+                <input
+                    type="text"
+                    id="studentName"
+                    name="studentName"
+                    th:value="${edit['STUDENT_NAME']}"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="studentID">Student ID:</label>
+                <input
+                    type="text"
+                    id="studentID"
+                    name="studentID"
+                    th:value="${edit['STUDENT_ROLL']}"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="studentPhone">Student Phone:</label>
+                <input
+                    type="text"
+                    id="studentPhone"
+                    name="studentPhone"
+                    th:value="${edit['STUDENT_PHONE']}"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="studentClass">Student Class:</label>
+                <input
+                    type="text"
+                    id="studentClass"
+                    name="studentClass"
+                    th:value="${edit['STUDENT_CLASS']}"
+                    required
+                />
+            </div>
+            <p class="text-center p-3">
+              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="reset" class="btn btn-danger">Reset</button>
+          </p>
+        </form>
     </div>
-  </body>
+</body>
 </html>

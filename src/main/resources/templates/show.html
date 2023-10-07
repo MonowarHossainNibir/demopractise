@@ -83,7 +83,7 @@ body, h1, h2, p, ul, li {
         <div class="header">
             <h3 class="title">All Students Record</h3>
         </div>
-        <a href="#"><button class="add-button">Add Students +</button></a>
+        <a th:href="@{/index}"><button class="add-button">Add Students +</button></a>
         <table class="student-table">
             <thead>
                 <tr>
@@ -102,6 +102,8 @@ body, h1, h2, p, ul, li {
                     <td th:text="${student['STUDENT_CLASS']}"></td>
                     <td>
                       <a th:href="@{'/studentdelete?studentID=' + ${student['ID']}}"><button class="btn btn-danger">Delete</button></a>
+                      <a th:href="@{'/edit?studentID=' + ${student['ID']}}">
+                        <button class="btn btn-info mb-1">Edit User</button></a>
                   </td>
                 </tr>
             </tbody>
