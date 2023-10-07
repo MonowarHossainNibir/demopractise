@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Students Record</title>
+    <style>
+        /* Reset some default browser styles */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply styles to the container */
+.container {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Style the header */
+.header {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-weight: bold;
+}
+
+/* Style the "Add Students" button */
+.add-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.add-button:hover {
+    background-color: #0056b3;
+}
+
+/* Style the student table */
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.student-table th, .student-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.student-table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.student-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.student-table tr:hover {
+    background-color: #ddd;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h3 class="title">All Students Record</h3>
+        </div>
+        <a href="#"><button class="add-button">Add Students +</button></a>
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Student Roll</th>
+                    <th>Student Phone</th>
+                    <th>Student Class</th>
+                </tr>
+            </thead>
+            <tbody> 
+                <tr th:each="student : ${studentshow}">
+                    <td th:text="${student['STUDENT_NAME']}"></td>
+                    <td th:text="${student['STUDENT_ROLL']}"></td>
+                    <td th:text="${student['STUDENT_PHONE']}"></td>
+                    <td th:text="${student['STUDENT_CLASS']}"></td>
+                    <td>
+                        <a th:href="@{'/studentdelete?studentId=' + ${student['STUDENT_ROLL']}}"><button class="btn btn-danger"><i class="fa-duotone fa-trash fa-xl"></i></button></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+

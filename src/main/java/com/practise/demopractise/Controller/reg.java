@@ -1,5 +1,9 @@
 package com.practise.demopractise.Controller;
 
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -39,8 +43,18 @@ public class reg {
     }
 
     @GetMapping("/success")
-    public String succPage() {
+    public String successPage() {
         return "success";
+    }
+
+    @GetMapping("/edit")
+    public String editPage() {
+        return "edit";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboardPage() {
+        return "dashboard";
     }
 
     @PostMapping("/registrationSystem")
@@ -72,7 +86,7 @@ public class reg {
             User user = jdbcTemplate.queryForObject(sql, userRowMapper, username, password);
 
             if (user != null) {
-                return "redirect:/index";
+                return "redirect:/dashboard";
             } else {
                 model.addAttribute("error", "Invalid username or password");
                 return "error";
@@ -93,6 +107,26 @@ public class reg {
         String sql = "INSERT INTO student (STUDENT_NAME,STUDENT_ROLL,STUDENT_PHONE,STUDENT_CLASS) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql, studentName, studentIDValue, studentPhone, studentClassValue);
-        return "redirect:/success";
+        return "redirect:/show";
     }
+
+    @GetMapping("/show")
+    public String showPage(Model model) {
+        String sql = "SELECT * FROM student";
+        List<Map<String, Object>> studentshow = jdbcTemplate.queryForList(sql);
+        model.addAttribute("studentshow", studentshow);
+        // model.addAttribute("totalCredit", formattedTotalCredit);
+        return "show";
+    }
+
+    @GetMapping("/studentdelete")
+    public String studentdelete(
+        @RequestParam int studentID) {
+        String sql = "DELETE FROM student WHERE id = ?";
+        jdbcTemplate.update(sql, studentID);
+    
+        return "redirect:/show"; // Redirect to the show page after deletion
+    }
+    
+
 }

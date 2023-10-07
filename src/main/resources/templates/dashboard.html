@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html xmlns:th="http://www.thymeleaf.org" lang="en"></html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      .dashboard {
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        padding: 20px;
+        max-width: 400px;
+        margin: 100px auto;
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #333;
+      }
+
+      .actions {
+        margin-top: 20px;
+      }
+
+      .action-link {
+        display: block;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin: 10px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .action-link:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard">
+      <h1>Welcome to the Dashboard</h1>
+      <div class="actions">
+        <a href="registration.html" th:href="@{/index}" class="action-link">Register Student</a>
+        <a href="show.html" th:href="@{/show}" class="action-link">Show Students</a>
+        <a href="edit.html" th:href="@{/edit}" class="action-link">Edit Student Info</a>
+        <a href="delete.html" th:href="@{/delete}" class="action-link">Delete Student</a>
+      </div>
+    </div>
+  </body>
+</html>
